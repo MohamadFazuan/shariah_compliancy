@@ -40,7 +40,7 @@ function TableFile() {
     const downloadPdf = (_id) => {
         listDocs.map((result) => {
             console.log("result", result.id);
-            if (_id == result.id && result.status == "processed") {
+            if (_id == result.id && (result.status == "processed" || "reprocessed")) {
                 fetch(process.env.NEXT_PUBLIC_BACKEND_URI + "/view", {
                     method: "POST",
                     headers: {
@@ -77,7 +77,7 @@ function TableFile() {
     // View Report
     const viewDocs = (_id) => {
         listDocs.map((result) => {
-            if (_id == result.id && result.status == "processed") {
+            if (_id == result.id && (result.status == "processed" || "reprocessed")) {
                 fetch(process.env.NEXT_PUBLIC_BACKEND_URI + "/view", {
                     method: "POST",
                     headers: {
