@@ -69,11 +69,11 @@ function TableFile() {
                             doc.text(10, y, `${clause}\n${distance}\n${ratio}`, { maxWidth: 180 });
                             y = y + lineHeight.h + 20
                         }
-                        var result2MinDistance = await doc.splitTextToSize(`MinDistance: ${x.Result2.MinDistance}`, 280);
-                        var result2MaxRatio = await doc.splitTextToSize(`MinDistance: ${x.Result2.MaxRatio}`, 280);
-                        var result2RatioLabel = await doc.splitTextToSize(`MinDistance: ${x.Result2.MaxRatioLabel}`, 280);
-                        var result2RatioLabelContent = await doc.splitTextToSize(`MinDistance: ${x.Result2.MaxRatioLabelContent}`, 280);
-                        doc.text(10, y, `${result2MinDistance}\n${result2MaxRatio}\n${result2RatioLabel}\n${result2RatioLabelContent}`, { maxWidth: 180 });
+                        var result2MinDistance = await doc.splitTextToSize(`The least distance is:  ${x.Result2.MinDistance}`, 280);
+                        var result2MaxRatio = await doc.splitTextToSize(`The greatest ratio is: ${x.Result2.MaxRatio}`, 280);
+                        var result2RatioLabel = await doc.splitTextToSize(`RatioLabel: ${x.Result2.MaxRatioLabel}`, 280);
+                        var result2RatioLabelContent = await doc.splitTextToSize(`${x.Result2.MaxRatioLabelContent}`, 280);
+                        doc.text(10, y, `${result2MinDistance}\t${result2MaxRatio}\n${result2RatioLabelContent}`, { maxWidth: 180 });
                         doc.save('Report.pdf');
                         // window.open(doc.output('bloburl')); // Preview
                     });
@@ -113,11 +113,11 @@ function TableFile() {
                             doc.text(10, y, `${clause}\n${distance}\n${ratio}`, { maxWidth: 180 });
                             y = y + lineHeight.h + 20
                         }
-                        var result2MinDistance = await doc.splitTextToSize(`MinDistance: ${x.Result2.MinDistance}`, 280);
-                        var result2MaxRatio = await doc.splitTextToSize(`MinDistance: ${x.Result2.MaxRatio}`, 280);
-                        var result2RatioLabel = await doc.splitTextToSize(`MinDistance: ${x.Result2.MaxRatioLabel}`, 280);
-                        var result2RatioLabelContent = await doc.splitTextToSize(`MinDistance: ${x.Result2.MaxRatioLabelContent}`, 280);
-                        doc.text(10, y, `${result2MinDistance}\n${result2MaxRatio}\n${result2RatioLabel}\n${result2RatioLabelContent}`, { maxWidth: 180 });
+                        var result2MinDistance = await doc.splitTextToSize(`The least distance is:  ${x.Result2.MinDistance}`, 280);
+                        var result2MaxRatio = await doc.splitTextToSize(`The greatest ratio is: ${x.Result2.MaxRatio}`, 280);
+                        var result2RatioLabel = await doc.splitTextToSize(`RatioLabel: ${x.Result2.MaxRatioLabel}`, 280);
+                        var result2RatioLabelContent = await doc.splitTextToSize(`${x.Result2.MaxRatioLabelContent}`, 280);
+                        doc.text(10, y, `${result2MinDistance}\t${result2MaxRatio}\n${result2RatioLabelContent}`, { maxWidth: 180 });
                         // doc.save('Report.pdf');
                         window.open(doc.output('bloburl')); // Preview
                     });
