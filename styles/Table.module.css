@@ -29,3 +29,7 @@
     color: blue;
     cursor: pointer;
 }
+
+.eye:disabled{
+    cursor:not-allowed
+}

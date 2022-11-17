@@ -104,7 +104,6 @@ const DropZone = ({ data, dispatch }) => {
         // initialize formData object
         const formData = new FormData();
         // loop over files and add to formData
-        // counterList();
 
         if (files.length == 1) {
 

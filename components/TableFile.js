@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import Router from 'next/router';
 import { Table, Row, Col, Tooltip, User, Text, Grid, Spacer, Textarea, Button } from "@nextui-org/react";
 import { StyledBadge } from "./Table/StyledBadge";
 import { IconButton } from "./Table/IconButton";
@@ -57,15 +58,22 @@ function TableFile() {
                         var y = 10;
                         for (var i = 0; i < x.Result1.length; i++) {
                             var clause = await doc.splitTextToSize(`Clause: ${x.Result1[i].Clause} => ${x.Result1[i].ClauseText}`, 280);
+                            var distance = await doc.splitTextToSize(`Distance: ${x.Result1[i].Distance}`, 280);
+                            var ratio = await doc.splitTextToSize(`Ratio: ${x.Result1[i].Ratio}`, 280);
                             var lineHeight = doc.getTextDimensions(clause);
 
                             if (y > 280) {
                                 y = 15;
                                 doc.addPage();
                             }
-                            doc.text(10, y, `${clause}`, { maxWidth: 180 });
+                            doc.text(10, y, `${clause}\n${distance}\n${ratio}`, { maxWidth: 180 });
                             y = y + lineHeight.h + 20
                         }
+                        var result2MinDistance = await doc.splitTextToSize(`MinDistance: ${x.Result2.MinDistance}`, 280);
+                        var result2MaxRatio = await doc.splitTextToSize(`MinDistance: ${x.Result2.MaxRatio}`, 280);
+                        var result2RatioLabel = await doc.splitTextToSize(`MinDistance: ${x.Result2.MaxRatioLabel}`, 280);
+                        var result2RatioLabelContent = await doc.splitTextToSize(`MinDistance: ${x.Result2.MaxRatioLabelContent}`, 280);
+                        doc.text(10, y, `${result2MinDistance}\n${result2MaxRatio}\n${result2RatioLabel}\n${result2RatioLabelContent}`, { maxWidth: 180 });
                         doc.save('Report.pdf');
                         // window.open(doc.output('bloburl')); // Preview
                     });
@@ -94,15 +102,22 @@ function TableFile() {
                         var y = 10;
                         for (var i = 0; i < x.Result1.length; i++) {
                             var clause = await doc.splitTextToSize(`Clause: ${x.Result1[i].Clause} => ${x.Result1[i].ClauseText}`, 280);
+                            var distance = await doc.splitTextToSize(`Distance: ${x.Result1[i].Distance}`, 280);
+                            var ratio = await doc.splitTextToSize(`Ratio: ${x.Result1[i].Ratio}`, 280);
                             var lineHeight = doc.getTextDimensions(clause);
 
                             if (y > 280) {
                                 y = 15;
                                 doc.addPage();
                             }
-                            doc.text(10, y, `${clause}`, { maxWidth: 180 });
+                            doc.text(10, y, `${clause}\n${distance}\n${ratio}`, { maxWidth: 180 });
                             y = y + lineHeight.h + 20
                         }
+                        var result2MinDistance = await doc.splitTextToSize(`MinDistance: ${x.Result2.MinDistance}`, 280);
+                        var result2MaxRatio = await doc.splitTextToSize(`MinDistance: ${x.Result2.MaxRatio}`, 280);
+                        var result2RatioLabel = await doc.splitTextToSize(`MinDistance: ${x.Result2.MaxRatioLabel}`, 280);
+                        var result2RatioLabelContent = await doc.splitTextToSize(`MinDistance: ${x.Result2.MaxRatioLabelContent}`, 280);
+                        doc.text(10, y, `${result2MinDistance}\n${result2MaxRatio}\n${result2RatioLabel}\n${result2RatioLabelContent}`, { maxWidth: 180 });
                         // doc.save('Report.pdf');
                         window.open(doc.output('bloburl')); // Preview
                     });
@@ -155,6 +170,7 @@ function TableFile() {
         }).then((result) => {
             result.text().then((x) => { alert(x) })
             fetchList();
+            Router.reload(window.location.pathname);
         });
     };
 
@@ -170,7 +186,7 @@ function TableFile() {
         switch (columnKey) {
             case "name":
                 return (
-                    <Col aria-labelledby="name" onClick={() => {
+                    <Col className={styles.input} aria-labelledby="name" onClick={() => {
                         getDataID(doc.id)
                     }}>
                         {doc.name}
@@ -192,9 +208,9 @@ function TableFile() {
                     <Row aria-labelledby="row" justify="center" align="center">
                         <Col css={{ d: "flex" }}>
                             <Tooltip content="View Report">
-                                <IconButton aria-label="viewButton" onClick={() => {
+                                <IconButton className={styles.eye} aria-label="viewButton" onClick={() => {
                                     viewDocs(doc.id)
-                                }}>
+                                }} disabled={doc.status == "new"}>
                                     <EyeIcon size={20} fill="#979797" />
                                 </IconButton>
                             </Tooltip>
